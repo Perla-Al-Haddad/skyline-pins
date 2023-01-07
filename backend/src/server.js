@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 
-const db = require("./app/models");
+const db = require("./models");
 db.sequelize.sync({ force: true })
   .then(() => {
     console.log("Synced db.");
@@ -25,10 +25,8 @@ db.sequelize.sync({ force: true })
   });
 
 
-// define a route handler for the default home page
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
+require("./routes/pin.routes")(app);
+
 
 // start the Express server
 app.listen(PORT, () => {
