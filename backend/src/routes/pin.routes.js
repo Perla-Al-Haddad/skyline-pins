@@ -3,23 +3,23 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  // Create a new Tutorial
+  // Create a new pin
   router.post("/", pins.create);
 
-  // // Retrieve all pins
-  // router.get("/", pins.findAll);
+  // Retrieve all pins
+  router.get("/", pins.findAll);
 
-  // // Retrieve a single Tutorial with id
-  // router.get("/:id", pins.findOne);
+  // Retrieve a single pin with id
+  router.get("/:id", pins.findOne);
 
-  // // Update a Tutorial with id
-  // router.put("/:id", pins.update);
+  // Update a pin with id
+  router.put("/:id", pins.update);
 
-  // // Delete a Tutorial with id
-  // router.delete("/:id", pins.delete);
+  // Delete a pin with id
+  router.delete("/:id", pins.delete);
 
-  // // Create a new Tutorial
-  // router.delete("/", pins.deleteAll);
+  // Create a new pin
+  router.delete("/", pins.deleteAll);
 
   app.use('/api/pins', router);
 };
