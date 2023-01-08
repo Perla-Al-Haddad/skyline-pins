@@ -21,7 +21,8 @@ exports.create = (req, res) => {
   const pin = {
     id: uuidv4(),
     message: req.body.message,
-    coords: x + ", " + y
+    coords: x + ", " + y,
+    userId: req.body.userId || null
   };
 
   // Save Tutorial in the database
@@ -96,6 +97,27 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Error retrieving Pin with id=" + id
+      });
+    });
+};
+
+// Find the pins of a user given their id
+exports.findByUser = (req, res) => {
+  const userId = req.params.userId;
+  Pin.findAll({
+    where: { userId: userId }
+  }).then(data => {
+    if (data) {
+      res.send(data);
+    } else {
+      res.status(404).send({
+        message: `Cannot Pins for User with id=${userId}.`
+      });
+    }
+  })
+    .catch(err => {
+      res.status(500).send({
+        message: `Error retrieving Pins for User with id=${userId}.`
       });
     });
 };

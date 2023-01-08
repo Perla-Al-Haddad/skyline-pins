@@ -9,7 +9,24 @@ module.exports = (sequelize, Sequelize) => {
     username: {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        isUnique: function (value, next) {
+          var self = this;
+          console.log(value)
+          User.findAll({ where: { username: value } })
+            .then(function (user) {
+              // reject if a different user wants to use the same username
+              if (user.length && self.id !== user.id) {
+                return next('username already in use!');
+              }
+              return next();
+            })
+            .catch(function (err) {
+              return next(err);
+            });
+        }
+      }
     },
     password: {
       type: Sequelize.STRING,

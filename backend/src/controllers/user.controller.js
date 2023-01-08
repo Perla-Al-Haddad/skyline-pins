@@ -83,14 +83,15 @@ exports.findOne = (req, res) => {
 };
 
 // Update a User by the id in the request
-//! Password not encrypted on update
 exports.update = (req, res) => {
   const id = req.params.id;
 
   User.update(req.body, {
-    where: { id: id }
+    where: { id: id },
+    individualHooks: true
   })
     .then(num => {
+      num = num[0];
       if (num == 1) {
         res.send({
           message: "User was updated successfully."

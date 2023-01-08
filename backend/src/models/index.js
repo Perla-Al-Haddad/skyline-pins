@@ -24,4 +24,7 @@ db.sequelize = sequelize;
 db.pins = require("./pin.model.js")(sequelize, Sequelize);
 db.users = require("./user.model.js")(sequelize, Sequelize);
 
+//* Associations
+db.users.hasMany(db.pins);
+
 module.exports = db;
