@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 const db = require("./models");
-db.sequelize.sync()
+db.sequelize.sync({ force: true })
   .then(() => {
     console.log("Synced db.");
   })
@@ -26,7 +26,7 @@ db.sequelize.sync()
 
 
 require("./routes/pin.routes")(app);
-
+require("./routes/user.routes")(app);
 
 // start the Express server
 app.listen(PORT, () => {

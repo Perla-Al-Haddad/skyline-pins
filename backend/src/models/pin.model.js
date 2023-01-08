@@ -6,11 +6,13 @@ module.exports = (sequelize, Sequelize) => {
     },
     // Not Null
     coords: {
-      type: "Point"
+      type: "Point",
+      allowNull: false
     },
     // Not Null
     message: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     }
   });
 

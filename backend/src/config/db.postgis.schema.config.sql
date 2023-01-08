@@ -1,3 +1,5 @@
+--? Run this script to configure postgis schema on the db
+
 CREATE EXTENSION postgis;
 
 CREATE SCHEMA postgis;
